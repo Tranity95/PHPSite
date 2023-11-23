@@ -1,13 +1,9 @@
 <?php
-use App\Controller\BackEndController;
-use App\Controller\FrontController;
+use App\FrontEndController;
 use App\Model\ArticleModel;
-use App\Model\UserModel;
 use App\Service\ArticleService;
-use App\Service\UserService;
-use App\View\BackView;
-use App\View\FrontView;
-use Jenssegers\Blade\Blade;
+use App\Views\BackView;
+use App\Views\View;
 use Opis\Database\Connection;
 use Opis\Database\Database;
 
@@ -28,40 +24,28 @@ return [
         ->constructor(
             get('Database')
         ),
-    'UserModel' => create(UserModel::class)
+    'View' => create(View::class)
         ->constructor(
-            get('Database')
+            get('FrontTwig')
         ),
-    'FrontBlade' => create(Blade::class)
+    'BackView' => create(View::class)
         ->constructor(
-            'template/frontend',
-            'cache'
-        ),
-    'BackBlade' => create(Blade::class)
-        ->constructor(
-            'template/backend',
-            'cache'
-        ),
-    'FrontView' => create(FrontView::class)
-        ->constructor(
-            get('FrontBlade')
-        ),
-    'BackView' => create(BackView::class)
-        ->constructor(
-            get('BackBlade')
+            get('BackTwig')
         ),
     'ArticleService' => create(ArticleService::class)
         ->constructor(
             get('ArticleModel')
         ),
+    /*
     'UserService' => create(UserService::class)
         ->constructor(
             get('UserModel')
         ),
-    FrontController::class => create(FrontController::class)
+    */
+    FrontEndController::class => create(FrontEndController::class)
         ->constructor(
             get('ArticleService'),
-            get('FrontView')
+            get('View')
         ),
     BackController::class => create(BackController::class)
         ->constructor(

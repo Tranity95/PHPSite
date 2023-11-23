@@ -1,5 +1,6 @@
 <?php
 namespace App;
+
 class Model
 {
     public function getArticles(): array

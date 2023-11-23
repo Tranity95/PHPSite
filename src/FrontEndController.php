@@ -1,22 +1,28 @@
 <?php
+
 namespace App;
+
+use App\Service\ArticleService;
 use App\View;
 use App\Models;
+
 class FrontEndController
 {
-    private Models\ArticleModel $model;
+    private $articleService;
     private \App\View $view;
 
-    public function __construct()
+    public function __construct(ArticleService $articleService, View $view)
     {
-        $this->model = new Models\ArticleModel();
-        $this->view = new \App\View();
+        $this->articleService = $articleService;
+        $this->view = $view;
     }
+
     public function articleList()
     {
-        $articles = $this->model->getAll();
+        $articles = $this->articleService->index();
         $this->view->showArticleList($articles);
     }
+
     public function singleArticle($id)
     {
         $article = $this->model->getById((int)$id);

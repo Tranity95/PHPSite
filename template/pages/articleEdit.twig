@@ -1,0 +1,30 @@
+{% extends "layout.twig" %}
+
+{% block pagetitle %}
+ {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+
+<form method="post" action="/admin/update">
+    <ul class="list-group">
+        <li class="list-group-item m-1">
+            <p>Название статьи:</p>
+            <input width="1000" type="text" value="{{ article.title }}" name="title">
+        </li>
+        <li class="list-group-item m-1">
+            <p>Контент статьи:</p>
+            <input type="text" value="{{ article.content }}" name="content">
+        </li>
+        <li class="list-group-item m-1">
+            <p>Завершение</p>
+            <input type="submit" class="btn btn-success" value="save">
+        </li>
+    </ul>
+    <input type="hidden" value="{{ article.id }}" name="id1">
+    <input type="hidden" value="{{ article.id }}" name="id">
+</form>
+
+
+{% endblock %}

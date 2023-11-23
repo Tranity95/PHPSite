@@ -1,0 +1,45 @@
+{% extends "layout.twig" %}
+
+{% block pagetitle %}
+ {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- Dark Table -->
+    <table class="table table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+                <a href="/admin/article/create" class="btn btn-success" class="bi bi-ui-checks">Add new</a>
+            </th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <th scope="row">{{ article.id }}</th>
+                <td>{{ article.title }}</td>
+                <td><img src="{{ article.image }}" alt="" style="max-width: 200px"></td>
+                <td>
+                    <a href="/admin/article/edit/{{ article.id }}" class="btn btn-success"><i class="bi bi-ui-checks"></i>Edit</a>
+                </td>
+                <td>
+                    <a href="/admin/article/delete/{{ article.id }}" class="btn btn-danger"><i class="bi bi-trash"></i>Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <!-- End Dark Table -->
+
+
+{% endblock %}
